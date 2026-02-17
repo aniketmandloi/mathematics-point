@@ -1,0 +1,33 @@
+{
+  "name": "mathematics-point",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "check-types": "turbo check-types",
+    "dev:native": "turbo -F native dev",
+    "dev:web": "turbo -F web dev",
+    "dev:server": "turbo -F server dev",
+    "db:push": "turbo -F @mathematics-point/db db:push",
+    "db:studio": "turbo -F @mathematics-point/db db:studio",
+    "db:generate": "turbo -F @mathematics-point/db db:generate",
+    "db:migrate": "turbo -F @mathematics-point/db db:migrate"
+  },
+  "dependencies": {
+    "@mathematics-point/env": "workspace:*",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@mathematics-point/config": "workspace:*",
+    "@types/node": "^22.13.14",
+    "turbo": "^2.6.3",
+    "typescript": "catalog:"
+  },
+  "packageManager": "pnpm@10.15.1"
+}
