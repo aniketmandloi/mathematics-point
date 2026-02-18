@@ -1,5 +1,10 @@
 import { protectedProcedure, publicProcedure, router } from "../index";
-import { todoRouter } from "./todo";
+import { chapterRouter } from "./chapter";
+import { contentRouter } from "./content";
+import { courseRouter } from "./course";
+import { paymentRouter } from "./payment";
+import { studentRouter } from "./student";
+import { userRouter } from "./user";
 
 export const appRouter = router({
   healthCheck: publicProcedure.query(() => {
@@ -11,6 +16,11 @@ export const appRouter = router({
       user: ctx.session.user,
     };
   }),
-  todo: todoRouter,
+  user: userRouter,
+  course: courseRouter,
+  chapter: chapterRouter,
+  content: contentRouter,
+  student: studentRouter,
+  payment: paymentRouter,
 });
 export type AppRouter = typeof appRouter;

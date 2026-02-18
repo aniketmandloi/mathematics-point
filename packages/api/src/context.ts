@@ -3,7 +3,7 @@ import type { CreateFastifyContextOptions } from "@trpc/server/adapters/fastify"
 import { auth } from "@mathematics-point/auth";
 import { fromNodeHeaders } from "better-auth/node";
 
-export async function createContext({ req, res }: CreateFastifyContextOptions) {
+export async function createContext({ req }: CreateFastifyContextOptions) {
   const session = await auth.api.getSession({
     headers: fromNodeHeaders(req.headers),
   });

@@ -50,4 +50,7 @@ tmp
 temp
 
 userInstructions.md
-requirments.md
+requirements.md
+
+# Claude Code
+.claude/commands

@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "../index.css";
-import Header from "@/components/header";
 import Providers from "@/components/providers";
 
 const geistSans = Geist({
@@ -17,8 +16,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "mathematics-point",
-  description: "mathematics-point",
+  title: {
+    default: "Mathematics Point — Expert Math Coaching Online",
+    template: "%s | Mathematics Point",
+  },
+  description:
+    "Expert mathematics coaching from foundation to competitive exams. Video lectures, practice problems, live classes, and personalized learning for Classes 6-12, JEE & Olympiad.",
+  keywords: [
+    "mathematics coaching",
+    "online math classes",
+    "JEE preparation",
+    "CBSE mathematics",
+    "math tutor",
+  ],
 };
 
 export default function RootLayout({
@@ -28,13 +38,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Providers>
-          <div className="grid grid-rows-[auto_1fr] h-svh">
-            <Header />
-            {children}
-          </div>
-        </Providers>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

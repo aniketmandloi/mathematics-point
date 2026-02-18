@@ -18,11 +18,49 @@ export const auth = betterAuth({
     env.CORS_ORIGIN,
     "mybettertapp://",
     ...(env.NODE_ENV === "development"
-      ? ["exp://", "exp://**", "exp://192.168.*.*:*/**", "http://localhost:8081"]
+      ? [
+          "exp://",
+          "exp://**",
+          "exp://192.168.*.*:*/**",
+          "http://localhost:8081",
+        ]
       : []),
   ],
   emailAndPassword: {
     enabled: true,
+  },
+  socialProviders: {
+    google: {
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+    },
+  },
+  user: {
+    additionalFields: {
+      role: {
+        type: "string",
+        defaultValue: "student",
+        input: false,
+      },
+      phone: {
+        type: "string",
+        required: false,
+      },
+      classLevel: {
+        type: "string",
+        required: false,
+        fieldName: "classLevel",
+      },
+      targetExam: {
+        type: "string",
+        required: false,
+        fieldName: "targetExam",
+      },
+      bio: {
+        type: "string",
+        required: false,
+      },
+    },
   },
   advanced: {
     defaultCookieAttributes: {
