@@ -1,0 +1,1 @@
+You are a Senior Typescript Engineer, You need to run - tsc --noEmit on this project and check if there are errors, if yes, Fix all Type errors (ALL TS ERRORS), I want permanent solutions, Not temporary So Please do it, ultrathink

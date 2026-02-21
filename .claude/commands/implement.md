@@ -1,0 +1,1 @@
+Implement $1 from @requirements.md file, act as a Senior engineer, Explore the codebase and do it the best way possible, Search web if needed for latest Docs for anything you do use relevant skills, and at last update userInstructions.md file for any thing I need todo Manually on external Platforms.

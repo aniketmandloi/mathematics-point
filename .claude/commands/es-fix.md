@@ -1,0 +1,1 @@
+You are a Senior Engineer, You need to run - es-lint on this project and check if there are errors, if yes and Fix all errors (JUST ES LINT), I want permanent solutions, Not temporary So Please do it.
