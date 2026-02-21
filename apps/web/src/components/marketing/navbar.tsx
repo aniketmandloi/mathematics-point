@@ -21,22 +21,26 @@ export default function MarketingNavbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/60 backdrop-blur-xl supports-[backdrop-filter]:bg-background/40">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-sm">
+        <Link href="/" className="flex items-center gap-2.5">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/70 text-primary-foreground font-bold text-sm shadow-md shadow-primary/20">
             M
           </div>
-          <span className="text-lg font-bold">Mathematics Point</span>
+          <span className="text-lg font-bold tracking-tight">Mathematics Point</span>
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-8 md:flex">
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
+              className={`relative text-sm font-medium transition-colors hover:text-primary ${
                 pathname === href ? "text-primary" : "text-muted-foreground"
+              } after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:rounded-full after:bg-primary after:transition-all after:duration-300 ${
+                pathname === href
+                  ? "after:w-full"
+                  : "after:w-0 hover:after:w-full"
               }`}
             >
               {label}
@@ -49,7 +53,7 @@ export default function MarketingNavbar() {
           <Button variant="ghost" size="sm" asChild>
             <Link href="/login">Log in</Link>
           </Button>
-          <Button size="sm" asChild>
+          <Button size="sm" className="bg-gradient-to-r from-primary to-primary/80 shadow-md shadow-primary/20" asChild>
             <Link href="/login">Get Started</Link>
           </Button>
         </div>

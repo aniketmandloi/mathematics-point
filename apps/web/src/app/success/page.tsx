@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
+import { Suspense } from "react";
 import { CheckCircle2, Loader2 } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { trpc } from "@/utils/trpc";
 
-export default function SuccessPage() {
+function SuccessContent() {
   const searchParams = useSearchParams();
   const transactionId = searchParams.get("transaction_id");
 
@@ -97,5 +98,19 @@ export default function SuccessPage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-[60vh] items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+        </div>
+      }
+    >
+      <SuccessContent />
+    </Suspense>
   );
 }

@@ -19,18 +19,19 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="border-t bg-muted/40">
-      <div className="container mx-auto px-4 py-12">
+    <footer className="relative border-t bg-gradient-to-b from-background to-muted/30">
+      <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none" />
+      <div className="relative container mx-auto px-4 py-12">
         <div className="grid gap-8 md:grid-cols-4">
           <div>
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-sm">
+            <Link href="/" className="flex items-center gap-2.5">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/70 text-primary-foreground font-bold text-sm shadow-md shadow-primary/20">
                 M
               </div>
-              <span className="text-lg font-bold">Mathematics Point</span>
+              <span className="text-lg font-bold tracking-tight">Mathematics Point</span>
             </Link>
-            <p className="mt-3 text-sm text-muted-foreground">
-              Expert mathematics coaching from foundation to competitive exams.
+            <p className="mt-3 text-sm text-muted-foreground max-w-[240px]">
+              Expert mathematics coaching from foundation to competitive exams. Building strong problem solvers since 2014.
             </p>
           </div>
 

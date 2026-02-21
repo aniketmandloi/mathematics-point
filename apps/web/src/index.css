@@ -37,6 +37,10 @@
   --sidebar-accent-foreground: oklch(0.25 0.05 260);
   --sidebar-border: oklch(0.91 0.02 260);
   --sidebar-ring: oklch(0.55 0.18 260);
+  --accent-warm: oklch(0.75 0.15 75);
+  --accent-warm-foreground: oklch(0.25 0.05 75);
+  --gradient-start: oklch(0.45 0.2 260);
+  --gradient-end: oklch(0.55 0.22 280);
 }
 
 .dark {
@@ -71,6 +75,10 @@
   --sidebar-accent-foreground: oklch(0.97 0.005 260);
   --sidebar-border: oklch(1 0 0 / 12%);
   --sidebar-ring: oklch(0.55 0.18 260);
+  --accent-warm: oklch(0.78 0.13 75);
+  --accent-warm-foreground: oklch(0.15 0.04 75);
+  --gradient-start: oklch(0.55 0.2 260);
+  --gradient-end: oklch(0.6 0.2 280);
 }
 
 @theme inline {
@@ -106,6 +114,10 @@
   --color-card: var(--card);
   --color-foreground: var(--foreground);
   --color-background: var(--background);
+  --color-accent-warm: var(--accent-warm);
+  --color-accent-warm-foreground: var(--accent-warm-foreground);
+  --color-gradient-start: var(--gradient-start);
+  --color-gradient-end: var(--gradient-end);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -113,6 +125,160 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+}
+
+/* ── Utility Classes ── */
+
+.bg-grid-pattern {
+  background-image: radial-gradient(
+    circle,
+    oklch(0.5 0.03 260 / 20%) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+}
+
+.dark .bg-grid-pattern {
+  background-image: radial-gradient(
+    circle,
+    oklch(0.7 0.03 260 / 12%) 1px,
+    transparent 1px
+  );
+}
+
+.bg-gradient-radial {
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    var(--gradient-start),
+    transparent 70%
+  );
+}
+
+.glass {
+  backdrop-filter: blur(16px) saturate(1.8);
+  -webkit-backdrop-filter: blur(16px) saturate(1.8);
+  background: oklch(1 0 0 / 8%);
+  border: 1px solid oklch(1 0 0 / 15%);
+}
+
+.dark .glass {
+  background: oklch(1 0 0 / 5%);
+  border-color: oklch(1 0 0 / 10%);
+}
+
+.gradient-text {
+  background: linear-gradient(
+    135deg,
+    var(--gradient-start),
+    var(--gradient-end)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Keyframes ── */
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes blur-in {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-blur-in {
+  animation: blur-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
 @layer base {
@@ -124,5 +290,21 @@
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-fade-in,
+  .animate-scale-in,
+  .animate-slide-in-left,
+  .animate-slide-in-right,
+  .animate-blur-in,
+  .animate-float {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
   }
 }

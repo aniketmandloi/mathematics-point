@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   BookOpen,
   CheckCircle2,
@@ -21,10 +21,17 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { authClient } from "@/lib/auth-client";
 import { trpc } from "@/utils/trpc";
 
+const chapterColors = [
+  "bg-primary/10 text-primary",
+  "bg-accent-warm/15 text-accent-warm-foreground",
+  "bg-chart-2/10 text-chart-2",
+  "bg-chart-3/10 text-chart-3",
+  "bg-chart-4/10 text-chart-4",
+];
+
 export default function CoursePreviewPage() {
   const params = useParams<{ slug: string }>();
   const router = useRouter();
-  const queryClient = useQueryClient();
   const { data: session } = authClient.useSession();
 
   const courseQuery = useQuery(
@@ -150,9 +157,11 @@ export default function CoursePreviewPage() {
               {course.chapters.map((ch, i) => (
                 <div
                   key={ch.id}
-                  className="flex items-center gap-3 rounded-md border p-3"
+                  className="flex items-center gap-3 rounded-lg border p-3 transition-colors hover:bg-muted/50"
                 >
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-medium">
+                  <span
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${chapterColors[i % chapterColors.length]}`}
+                  >
                     {i + 1}
                   </span>
                   <div className="flex-1">
@@ -179,9 +188,9 @@ export default function CoursePreviewPage() {
 
         {/* Sidebar — pricing & enroll */}
         <div>
-          <Card className="sticky top-24">
+          <Card className="sticky top-24 overflow-hidden border-t-4 border-t-primary shadow-lg">
             {course.thumbnail ? (
-              <div className="aspect-video overflow-hidden rounded-t-lg">
+              <div className="aspect-video overflow-hidden">
                 <img
                   src={course.thumbnail}
                   alt={course.title}
@@ -189,7 +198,7 @@ export default function CoursePreviewPage() {
                 />
               </div>
             ) : (
-              <div className="flex aspect-video items-center justify-center rounded-t-lg bg-muted">
+              <div className="flex aspect-video items-center justify-center bg-muted">
                 <BookOpen className="h-12 w-12 text-muted-foreground" />
               </div>
             )}
@@ -199,7 +208,7 @@ export default function CoursePreviewPage() {
               </div>
 
               <Button
-                className="w-full"
+                className="w-full bg-gradient-to-r from-primary to-primary/80 shadow-md shadow-primary/20"
                 size="lg"
                 onClick={handleEnroll}
                 disabled={enrollMut.isPending || checkoutMut.isPending}
@@ -213,21 +222,21 @@ export default function CoursePreviewPage() {
                       : "Buy Now"}
               </Button>
 
-              <div className="space-y-2 text-sm text-muted-foreground">
+              <div className="space-y-2.5 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-primary" />
+                  <CheckCircle2 className="h-4 w-4 text-accent-warm" />
                   Full lifetime access
                 </div>
                 <div className="flex items-center gap-2">
-                  <Video className="h-4 w-4 text-primary" />
+                  <Video className="h-4 w-4 text-accent-warm" />
                   Video lectures
                 </div>
                 <div className="flex items-center gap-2">
-                  <FileText className="h-4 w-4 text-primary" />
+                  <FileText className="h-4 w-4 text-accent-warm" />
                   Downloadable study materials
                 </div>
                 <div className="flex items-center gap-2">
-                  <GraduationCap className="h-4 w-4 text-primary" />
+                  <GraduationCap className="h-4 w-4 text-accent-warm" />
                   Progress tracking
                 </div>
               </div>
